@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ремонт квартир в Астане | Точно в срок</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; }
+        header { background-color: #fff; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: bold; color: #0056b3; }
+        .btn { background-color: #0056b3; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; border: none; cursor: pointer; }
+        .btn:hover { background-color: #004494; }
+        .hero { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80') center/cover; color: white; padding: 100px 50px; text-align: center; }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; }
+        .section { padding: 50px; max-width: 1200px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; }
+        .card h3 { color: #0056b3; }
+        .calculator { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; }
+        .calc-group { margin-bottom: 20px; text-align: left; }
+        select, input[type="range"] { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
+        #calc-result { font-size: 24px; font-weight: bold; color: #28a745; margin-top: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">РемонтАстана</div>
+    <div>
+        <span style="margin-right: 20px;">📞 +7 (777) 000-00-00</span>
+        <a href="#calc" class="btn">Рассчитать стоимость</a>
+    </div>
+</header>
+
+<div class="hero">
+    <h1>Ремонт квартир в Астане точно в срок</h1>
+    <p>От косметического до дизайнерского под ключ. Смета не меняется в процессе. Выплачиваем 5% за каждый день просрочки!</p>
+</div>
+
+<div class="section">
+    <h2 style="text-align: center;">Популярные услуги</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Косметический ремонт</h3>
+            <p>От 15 000 ₸/м²</p>
+            <p style="font-size: 14px; color: #666;">Покраска, обои, замена плинтусов, мелкий ремонт. От 20 дней.</p>
+        </div>
+        <div class="card">
+            <h3>Капитальный ремонт</h3>
+            <p>От 30 000 ₸/м²</p>
+            <p style="font-size: 14px; color: #666;">Демонтаж, выравнивание, замена сантехники и электрики. От 40 дней.</p>
+        </div>
+        <div class="card">
+            <h3>Дизайнерский под ключ</h3>
+            <p>От 65 000 ₸/м²</p>
+            <p style="font-size: 14px; color: #666;">Индивидуальный дизайн, перепланировка, премиум-отделка. От 60 дней.</p>
+        </div>
+    </div>
+</div>
+
+<div id="calc" class="section">
+    <h2 style="text-align: center;">Онлайн-калькулятор ремонта</h2>
+    <div class="calculator">
+        <div class="calc-group">
+            <label>Площадь квартиры: <span id="area-val">50</span> м²</label>
+            <input type="range" id="area" min="20" max="200" value="50" oninput="document.getElementById('area-val').innerText = this.value; calculate();">
+        </div>
+        <div class="calc-group">
+            <label>Вид ремонта:</label>
+            <select id="type" onchange="calculate();">
+                <option value="15000">Косметический (без материалов) - 15 000 ₸/м²</option>
+                <option value="20000">Косметический (с материалами) - 20 000 ₸/м²</option>
+                <option value="30000">Капитальный (без материалов) - 30 000 ₸/м²</option>
+                <option value="45000">Капитальный (с материалами) - 45 000 ₸/м²</option>
+                <option value="65000">Дизайнерский под ключ - 65 000 ₸/м²</option>
+            </select>
+        </div>
+        <div id="calc-result">Примерная стоимость: 750 000 ₸</div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn" onclick="alert('В реальном сайте здесь откроется форма для ввода номера телефона')">Получить точную смету</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calculate() {
+        const area = document.getElementById('area').value;
+        const pricePerMeter = document.getElementById('type').value;
+        const total = area * pricePerMeter;
+        // Форматирование числа с пробелами
+        const formattedTotal = new Intl.NumberFormat('ru-RU').format(total);
+        document.getElementById('calc-result').innerText = 'Примерная стоимость: ' + formattedTotal + ' ₸';
+    }
+</script>
+
+</body>
+</html>
